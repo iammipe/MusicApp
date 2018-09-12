@@ -1,0 +1,135 @@
+﻿@model IEnumerable<mnRelations.Models.Song>;
+
+@{     
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="buttons-arrows">
+    <div class="button-arrow-add">
+        <div class="arrow-div arrow-add-show">
+            <p>Add song</p>
+        </div>
+        <div class="arrow-icon arrow-icon-add-div">
+            <button class="arrow-icon-add"></button>
+        </div>
+    </div>
+
+    <div class="button-arrow-add">
+        <div class="arrow-div arrow-az-show">
+            <p>Sort A - Z</p>
+        </div>
+        <div class="arrow-icon arrow-icon-az-div">
+            <button class="arrow-icon-az"></button>
+        </div>
+    </div>
+
+    <div class="button-arrow-add">
+        <div class="arrow-div arrow-numbers-show">
+            <p>Sort by id</p>
+        </div>
+        <div class="arrow-icon arrow-icon-numbers-div">
+            <button class="arrow-icon-numbers"></button>
+        </div>
+    </div>
+
+    <div class="button-arrow-add">
+        <div class="arrow-div arrow-playlists-show">
+            <p>See all playlists</p>
+        </div>
+        <div class="arrow-icon arrow-icon-playlists-div">
+            <button class="arrow-icon-playlists"></button>
+        </div>
+    </div>
+</div>
+
+<div id="main-songs-title">
+    <h1> All songs from your media </h1>
+</div>
+<div class="all-songs-div">
+    @{ int counter = 0; }
+    @foreach (var song in Model)
+    {
+        counter++;
+        <div class="song-card-div">
+            <div class="card-number"><h1 id="@song.SongID"> @counter </h1></div>
+            <div class="card-song-data">
+                <div class="card-text" id="song-name"><h3>@song.NameOfSong</h3></div>
+                <div class="card-text"><h3>@song.NameOfArtist</h3></div>
+                <div class="card-text" id="song-duration"><h3>@song.Duration</h3></div>
+                <div class="card-buttons">
+                    <button class="song-button edit-button" id="@song.SongID"> Edit</button>
+                    <button class="song-button delete-song-button" id="@song.SongID"> Delete</button>
+                    <button class="song-button play-song-button" id="@song.SongID"> Play</button>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<div class="delete-confirmation delete-confirmation-song">
+    <div class="delete-confirmation-container delete-confirmation-container-song">
+        <div class="main-question main-question-song">
+            <h1>Are you sure you want to delete this song?</h1>
+        </div>
+        <div>
+            <h3>When you delete this song you cannot retreive it back. <br /> It will be deleted from playlists too!</h3>
+        </div>
+        <div>
+            <button class="no-delete" id="no-delete-song">NO</button>
+            <button class="yes-delete" id="yes-delete-song">YES</button>
+        </div>
+    </div>
+</div>
+
+<div class="edit-song-popup">
+    <div class="edit-song-confirmation">
+        <h2>Edit specific song</h2>
+        <form>
+            <div class="trio-rio  trio-rio-edit">
+                <input class="song-input" id="song-input-name" name="NameOfSong"/>
+                <input class="song-input" id="artist-input-name" name="NameOfArtist"/>
+                <input class="song-input" id="duration-input-value" name="Duration"/>
+            </div>
+            <div class="trio-show">
+                <input class="song-class" id="song-input-url" name="SongURL"/>
+                <input class="song-class" id="picture-input-url" name="PictureURL"/>
+                <textarea class="song-class textarea-class" id="fun-fact-area" name="FunFact">Fun fact</textarea>
+            </div>
+            <div class="submit-show">
+                <!--<button>Submit</button>-->
+                <input type="submit" class="edit-song-submit-button" value="Submit" />
+            </div>
+        </form>
+    </div>
+
+    <div class="delete-song-container">
+        <button class="return-button return-edit-button"></button>
+    </div>
+</div>
+
+<div class="add-song-popup">
+    <div class="add-song-confirmation">
+        <h2>Add new song</h2>
+        <form action="/Song/AddNewSong" method="post">
+            <div class="trio-rio">
+                <input placeholder="Name of song" class="song-input" name="NameOfSong" />
+                <input placeholder="Name of artist" class="song-input" name="NameOfArtist" />
+                <input placeholder="Duration" class="song-input" name="Duration"/>
+            </div>
+            <div class="trio-show">
+                <input placeholder="Song URL" class="song-class" name="SongURL"/>
+                <input placeholder="Picture URL" class="song-class" name="PictureURL"/>
+                <textarea class="song-class textarea-class" name="FunFact">Fun fact</textarea>
+            </div>
+            <div class="submit-show add-song-submit">
+                <!--<button>Submit</button>-->
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+
+    <div class="delete-song-container">
+        <button class="return-add-button"></button>
+    </div>
+</div>

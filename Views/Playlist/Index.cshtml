@@ -1,0 +1,105 @@
+﻿@model  mnRelations.ModelView.ModelViewPlaylist;
+
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="current-song-container">
+    <div class="current-song-card">
+        <div class="current-song-image">
+            <img src="@Model.Playlist.PlaylistImage" />
+        </div>
+        <div class="current-song-data">
+            <h2>Playlist info</h2>
+            <p> Click on the song name to find out facts and less known informations about your favourite band and their hits </p>
+        </div>
+    </div>
+    <div class="add-playlist-btn">
+        <button id="show-playlist-btn">See all playlists</button>
+        <button id="see-songs-btn">See all songs</button>
+    </div>
+</div>
+
+
+<div class="full-wrap">
+        <div class="playlist-container">
+            <div class="playlist-div">
+                <div class="playlist-name">
+                    <div class="playlist-name-h1-div">
+                        <h1 id="@Model.Playlist.PlaylistID">@Model.Playlist.PlaylistName</h1>
+                        <div class="doubleclick-input">
+                            <input id="rename-playlist-input" value="@Model.Playlist.PlaylistName">
+                            <input id="rename-playlist-submit" class="action-rename" value="Rename" type="submit">
+                            <input id="rename-playlist-submit" class="return-rename" value="Return" type="submit">
+                        </div>
+                    </div>
+                </div>
+                <div class="playlist-btns">
+                    <button class="edit-btn">Add</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
+            </div>
+            <div class="song-container">
+                @foreach (var song in Model.Playlist.SongPlaylists)
+                {
+                    <div class="song-div">
+                        <div class="song-name">
+                            <div class="song-name-in-list" id="@song.SongID"><p>@song.Song.NameOfSong</p></div>
+                            <div><p>@song.Song.NameOfArtist</p></div>
+                            <div id="song-duration"><p>@song.Song.Duration</p></div>
+                        </div>
+                        <div class="song-btn">
+                            <button class="play-btn" id="@song.SongID">Play</button>
+                            <button class="delete-song-from-playlist" id="@song.SongID">Delete</button>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                }
+            </div>
+        </div>
+</div>
+
+<div class="delete-confirmation delete-confirmation-playlist">
+    <div class="delete-confirmation-container delete-confirmation-container-playlist">
+        <div class="main-question main-question-playlist">
+            <h1>Are you sure you want to delete this playlist?</h1>
+        </div>
+        <div>
+            <h3>When you delete your playlist you cannot retreive it back. <br /> All songs from playlist will remain undeleted!</h3>
+        </div>
+        <div>
+            <button class="no-delete" id="no-delete-playlist">NO</button>
+            <button class="yes-delete" id="yes-delete-playlist">YES</button>
+        </div>
+    </div>
+</div>
+
+<div class="add-songs-popup">
+    <div class="add-songs-container">
+        <div class="header-songs-container">
+            <h2 id="@Model.Playlist.PlaylistID" class="playlist-song-adding-id">Adding songs to "@Model.Playlist.PlaylistName" playlist</h2>
+        </div>
+        <div class="all-songs-container">
+            @foreach (var song in Model.Songs)
+            {
+                <div class="specific-song">
+                    <div class="specific-song-checkbox"><input type="checkbox" name="adding-songs-to-playlist-checkbox" id="@song.SongID"></div>
+                    <div class="specific-song-name"><p>@song.NameOfSong</p></div>
+                    <div class="specific-song-name"><p>@song.NameOfArtist</p></div>
+                    <div class="specific-song-name" id="song-duration"><p>@song.Duration</p></div>
+                </div>
+            }
+        </div>
+
+        <div class="songs-confirmation-container">
+            <button id="add-songs-to-playlist"> Add to playlist</button>
+        </div>
+   </div>
+
+    <div class="delete-song-container">
+        <button id="add-songs-exit"></button>
+    </div>
+    
+</div>

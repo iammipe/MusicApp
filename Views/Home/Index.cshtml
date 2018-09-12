@@ -1,0 +1,56 @@
+﻿@model IEnumerable<mnRelations.Models.Playlist>
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="main-header-text">
+    <h1> Pick your favourite music </h1>
+</div>
+
+<div class="full-playlists">
+    @foreach (var playlist in Model)
+    {
+
+        <div class="card clickable-card" id="@playlist.PlaylistID">
+            <div class="card-img">
+                <img src="@playlist.PlaylistImage" />
+            </div>
+            <div class="card-name">
+                <h1>@playlist.PlaylistName</h1>
+            </div>
+        </div>
+    }
+
+        <div class="new-card">
+            <button></button>
+            <p>Add new playlist</p>
+        </div>
+</div>
+
+<div class="add-playlist-confirmation">
+    <div class="add-playlist-confirmation-container">
+        <div id="exit-add-playlist">
+            <button></button>
+        </div>
+        <div class="main-div">
+            <div class="main-text">
+                <h1>Creating your new playlist  :)</h1>
+            </div>
+            <div class="adding-playlist">
+                <div><input placeholder="Name of playlist" id="playlist-name-input"/></div>
+                <div>
+                    <input placeholder="Image Url" id="playlist-url-input"/>
+                    <button>Add</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="thank-you-note">
+            <h1>Your playlist has been created!</h1>
+            <h2>Lets add some songs to it</h2>
+            <button class="lets-go-button">LET'S GO!</button>
+        </div>
+    </div>
+</div>
